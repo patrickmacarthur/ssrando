@@ -1,46 +1,51 @@
-# SEALED GROUNDS
+Sealed Grounds:
+  stages:
+    Sealed Grounds Spiral:
+      stage: F401
+      area:
+        Upper:
+          events:
+            Sealed Grounds Statue: Nothing
+          map-exits:
+            Sky - Field (Sealed Grounds Statue): Nothing
+          logic-exits:
+            Lower: Nothing
 
-Sealed Grounds Spiral Upper:
-  region: Sealed Grounds
-  events:
-    Sealed Grounds Statue: Nothing
-  exits:
-    Sky (Sealed Grounds Statue): Nothing
-    Sealed Grounds Spiral Lower: Nothing
-    Sky: Nothing
+        Lower:
+          events:
+            Defeat Imprisoned 2: Start Imprisoned 2 & Goddess Sword
+          map-exits:
+            Sealed Temple - Main: Nothing
+          logic-exits:
+            Upper: Beat Required Dungeons & Raise GoT
 
-Sealed Grounds Spiral Lower:
-  region: Sealed Grounds
-  events:
-    Defeat Imprisoned 2: Start Imprisoned 2 & Goddess Sword
-  exits:
-    Sealed Grounds Spiral Upper: Beat Required Dungeons & Raise GoT
-    Sealed Temple: Nothing
+    Sealed Temple:
+      stage: F402
+      areas:
+        Main:
+          events:
+            Start Imprisoned 2: Raise GoT & Beat Required Dungeons & Sword Requirement Met
+            Raise GoT: Goddess Harp
+          locations:
+            Inside Sealed Temple: Nothing
+            Ballad of the Goddess: Goddess Harp
+          map-exits:
+            Sealed Grounds Spiral - Lower: Nothing
+            Behind the Temple - Main: Nothing
 
-Sealed Temple:
-  region: Sealed Grounds
-  events:
-    Start Imprisoned 2: Raise GoT & Beat Required Dungeons & Sword Requirement Met
-    Raise GoT: Goddess Harp
-  locations:
-    Inside Sealed Temple: Nothing
-    Ballad of the Goddess: Goddess Harp
-  exits:
-    Sealed Grounds Spiral Lower: Nothing
-    Behind the Temple: Nothing
-
-Behind the Temple:
-  region: Sealed Grounds
-  events:
-    Behind the Temple Statue: Nothing
-  locations:
-    Gorko's Goddess Wall Reward: Goddess Harp & Goddess Sword & Goddess Wall Trigger in SV
-  exits:
-    Sky (Behind the Temple Statue): Nothing
-    Faron Woods Entry: Nothing
-    Sealed Grounds Spiral Upper: Nothing
-    Sealed Temple: Nothing
-
+    Behind the Temple:
+      stage: F400
+      areas:
+        events:
+          Behind the Temple Statue: Nothing
+        locations:
+          Gorko's Goddess Wall Reward: Goddess Harp & Goddess Sword & Goddess Wall Trigger in SV
+        exits:
+          Sky - Field (Behind the Temple Statue): Nothing
+          Faron Woods - Entry: Nothing
+          Sealed Grounds Spiral - Upper: Nothing
+          Sealed Temple - Main: Nothing
+# TODO: convert rest to new format
 Faron Woods Entry:
   region: Faron Woods
   events:
