@@ -122,8 +122,6 @@ def main():
     options = process_command_line_options(cmd_line_args)
     if options is not None:
         if bulk_mode:
-            from multiprocessing import Process
-
             options.set_option("dry-run", True)
 
             def randothread(start, end, local_opts):
@@ -132,13 +130,21 @@ def main():
                     rando = Randomizer(local_opts)
                     rando.randomize()
 
-            threads = []
-            for (start, end) in get_ranges(bulk_low, bulk_high, bulk_threads):
-                thread = Process(target=randothread, args=(start, end, options.copy()))
-                thread.start()
-                threads.append(thread)
-            for thread in threads:
-                thread.join()
+            if bulk_threads > 1:
+                from multiprocessing import Process
+
+                threads = []
+                for (start, end) in get_ranges(bulk_low, bulk_high, bulk_threads):
+                    thread = Process(
+                        target=randothread, args=(start, end, options.copy())
+                    )
+                    thread.start()
+                    threads.append(thread)
+                for thread in threads:
+                    thread.join()
+            else:
+                randothread(bulk_low, bulk_high + 1, options.copy())
+
         elif options["noui"]:
             rando = Randomizer(options)
             if not options["dry-run"]:
@@ -161,7 +167,4 @@ def main():
 
 
 if __name__ == "__main__":
-    from multiprocessing import freeze_support
-
-    freeze_support()
     main()
